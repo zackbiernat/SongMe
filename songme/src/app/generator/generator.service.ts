@@ -3,7 +3,7 @@ export class GeneratorService {
   progression;
   constructor() {
     this.partOfProgression = [];
-    this.progression= [];
+    this.progression = [];
   };
 
   makeSong() {
@@ -53,11 +53,12 @@ export class GeneratorService {
         return this.progressionGen(this.choose([1,5]), length);
     }
   };
+
   melody = function() {
     //should iterate over progression and determine notes for a melody
     var melody = [];
     for (var i = 0; i < this.partOfProgression.length; i++) {
-      var pitch = this.partOfProgression[i] + (this.choose(0, 2, 4, 7));
+      var pitch = this.partOfProgression[i] + (this.choose([0, 2, 4, 7]));
       switch (this.rando(0,10)) {
       case 0:
         melody.push([pitch]);
@@ -91,6 +92,6 @@ export class GeneratorService {
         break;
       }
     }
-    return console.log(melody)
+    console.log(melody)
   };
 }
