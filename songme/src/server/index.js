@@ -21,15 +21,17 @@ app.use(bodyParser.json());
 
 
 
-app.get('/make/a/song/api', (req, res) => {
-  console.log('Received')
+app.post('/make/a/song/api', (req, res) => {
+  console.log('Received a song request');
   let file = new Midi.File();
   let track = new Midi.Track();
   file.addTrack(track);
   track.addNote(0, 'c4', 64);
   track.addNote(0, 'e4', 64);
   track.addNote(0, 'g4', 64);
-  fs.writeFileSync('src/server/assets/SOMEMID.midi', file.toBytes(), 'binary');
+  let nameOfSong = req.body.user + req.body.songTitle;
+  let qs = 'src/server/assets/' + nameOfSong + '.midi'
+  fs.writeFileSync(qs, file.toBytes(), 'binary');
   res.sendStatus(200)
 });
 
