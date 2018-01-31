@@ -16,12 +16,12 @@ export class GeneratorComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.song, 'COPM INIT')
     let body = {
-      song: this.song,
+      song: this.song[0],
+      chords: this.song[1],
       songTitle: 'MyFirstSong',
       user: 'Zack'
-    }
+    };
     this.http.post('http://localhost:3000/make/a/song/api', body).subscribe(data => {
       console.log(data.result);
     })

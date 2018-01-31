@@ -7,8 +7,8 @@ export class GeneratorService {
   };
 
   makeSong() {
-    this.progressionGen(1, 32);
-    return this.melody()
+    this.progressionGen(1, 64);
+    return [this.melody(), this.progression];
   };
 
   rando(range1, range2) {
@@ -92,7 +92,6 @@ export class GeneratorService {
         break;
       }
     }
-    console.log(melody);
     return melody;
   };
 }
