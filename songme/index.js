@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 let http = require('http').Server(app);
-const makeMidi = require('./midiGen').makeMidi;
+const makeMidi = require('./src/server/midiGen').makeMidi;
 // require('dotenv').config();
 
 
@@ -14,7 +14,7 @@ let corsOption = {
   exposedHeaders: 'token'
 };
 app.use(cors(corsOption));
-app.use(express.static((__dirname + '/src')));
+app.use(express.static((__dirname + '/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.post('/make/a/song/api', makeMidi);
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/src/index.html');
+  res.sendFile(__dirname + '/dist/index.html');
 });
 
 const port = process.env.PORT || 3000;
