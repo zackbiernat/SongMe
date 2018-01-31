@@ -3,8 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 let http = require('http').Server(app);
-let Midi = require('jsmidgen');
-let fs = require('fs');
+const makeMidi = require('./midiGen').makeMidi;
 // require('dotenv').config();
 
 
@@ -21,19 +20,7 @@ app.use(bodyParser.json());
 
 
 
-app.post('/make/a/song/api', (req, res) => {
-  console.log('Received a song request');
-  let file = new Midi.File();
-  let track = new Midi.Track();
-  file.addTrack(track);
-  track.addNote(0, 'c4', 64);
-  track.addNote(0, 'e4', 64);
-  track.addNote(0, 'g4', 64);
-  let nameOfSong = req.body.user + req.body.songTitle;
-  let qs = 'src/server/assets/' + nameOfSong + '.midi'
-  fs.writeFileSync(qs, file.toBytes(), 'binary');
-  res.sendStatus(200)
-});
+app.post('/make/a/song/api', makeMidi);
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/src/index.html');
