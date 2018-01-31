@@ -18,8 +18,6 @@ app.use(express.static((__dirname + '/dist')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
 app.post('/make/a/song/api', makeMidi);
 
 app.get('/', (req, res) => {

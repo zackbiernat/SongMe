@@ -46,5 +46,5 @@ exports.makeMidi = function(req, res) {
   let nameOfSong = req.body.user + req.body.songTitle;
   let qs = 'src/server/assets/' + nameOfSong + '.midi'
   fs.writeFileSync(qs, file.toBytes(), 'binary');
-  res.sendStatus(200)
+  res.send({result: 'Hey there'})
 }
