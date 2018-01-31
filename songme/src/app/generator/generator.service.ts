@@ -1,12 +1,12 @@
 export class GeneratorService {
-
+  partOfProgression;
+  progression;
   constructor() {
     this.partOfProgression = [];
     this.progression= [];
   };
 
   makeSong() {
-    console.log('aaa', this.partOfProgression)
     this.progressionGen(1, 8);
     this.melody()
   };
@@ -15,17 +15,17 @@ export class GeneratorService {
     return Math.floor(Math.random() * Math.abs(range2-range1)) + range1;
   };
 
-  choose(input1, input2, input3, input4) {
-    var choice = this.rando(1, arguments.length+1)
+  choose(inputs) {
+    var choice = this.rando(1, inputs.length+1)
     switch (choice) {
       case 1:
-        return input1;
+        return inputs[0];
       case 2:
-        return input2;
+        return inputs[1];
       case 3:
-        return input3;
+        return inputs[2];
       case 4:
-        return input4;
+        return inputs[3];
     }
   }
 
@@ -42,15 +42,15 @@ export class GeneratorService {
       case 2:
         return this.progressionGen(5, length);
       case 3:
-        return this.progressionGen(this.choose(4,6), length);//returns 6 or 4
+        return this.progressionGen(this.choose([4,6]), length);//returns 6 or 4
       case 4:
-        return this.progressionGen(this.choose(1,2,5), length);
+        return this.progressionGen(this.choose([1,2,5]), length);
       case 5:
-        return this.progressionGen(this.choose(1,6), length);
+        return this.progressionGen(this.choose([1,6]), length);
       case 6:
-        return this.progressionGen(this.choose(2,4), length);
+        return this.progressionGen(this.choose([2,4]), length);
       case 7:
-        return this.progressionGen(this.choose(1,5), length);
+        return this.progressionGen(this.choose([1,5]), length);
     }
   };
   melody = function() {
