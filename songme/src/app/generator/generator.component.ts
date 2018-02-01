@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/co
 import { GeneratorService } from './generator.service';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-generator',
   templateUrl: './generator.component.html',
