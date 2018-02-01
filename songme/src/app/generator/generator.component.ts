@@ -18,6 +18,7 @@ export class GeneratorComponent implements OnInit {
 
   constructor(generatorService: GeneratorService, private http: HttpClient, private re: Renderer2) {
     this.song = generatorService.makeSong();
+
   }
 
   ngOnInit() {
@@ -33,8 +34,10 @@ export class GeneratorComponent implements OnInit {
       songTitle: this.songTitle,
       user: this.user
     };
-    this.http.post('http://localhost:3000/make/a/song/api', body).subscribe(data => {
-      console.log(data['result']);
+    this.http.post('http://localhost:3000/make/a/song/api', body).subscribe((data) => {
+      console.log(data);
+    }, (err) => {
+      console.log(err.error.text);
     })
   }
 
