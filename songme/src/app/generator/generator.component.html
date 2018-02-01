@@ -1,3 +1,18 @@
 <div>
-  generator works!
+  <h3>
+    SongMe will generate a semi-random midi song.
+  </h3>
+  <div>
+    <h5>
+      Please enter a name for your song!
+    </h5>
+    <input #generateSongTitle type="text" name="song-name" />
+    <h5>
+      What's your name?
+    </h5>
+    <input #generateSongOwner type="text" name="user-name" id="generate-song-owner" />
+  </div>
+  <div>
+    <button (click)="generateClickHandle()">Generate my song</button>
+  </div>
 </div>

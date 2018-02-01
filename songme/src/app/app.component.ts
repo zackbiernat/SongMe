@@ -7,5 +7,5 @@ import { GeneratorComponent } from './generator/generator.component';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title: string = 'app';
+  title: string = 'SongMe';
 }
