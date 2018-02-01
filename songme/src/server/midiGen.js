@@ -1,10 +1,13 @@
 let Midi = require('jsmidgen');
 let fs = require('fs');
+const path = require('path')
 
 exports.makeMidi = function(req, res) {
   let file = new Midi.File();
   let melody = new Midi.Track();
   let accomp = new Midi.Track();
+  let nameOfSong = req.body.user + req.body.songTitle;
+  let qs = 'src/server/assets/' + nameOfSong + '.midi';
   let song = req.body.song;
   let chords = req.body.chords;
   file.addTrack(melody);
@@ -51,7 +54,6 @@ exports.makeMidi = function(req, res) {
     }
   })
   chords[0].forEach(chord => {
-    console.log(chord, key[chord])
     accomp.addNoteOn(0, key[chord + 1]);
     accomp.addNoteOn(0, key[chord + 3]);
     accomp.addNoteOn(0, key[chord + 5]);
@@ -59,8 +61,19 @@ exports.makeMidi = function(req, res) {
     accomp.addNoteOff(0, key[chord + 3]);
     accomp.addNoteOff(0, key[chord + 5]);
   })
-  let nameOfSong = req.body.user + req.body.songTitle;
-  let qs = 'src/server/assets/' + nameOfSong + '.midi'
-  fs.writeFileSync(qs, file.toBytes(), 'binary');
-  res.send({result: 'Hey there'})
+  fs.writeFile(qs, file.toBytes(), 'binary', () => {
+    let filePath = path.join(__dirname, '/assets/' + nameOfSong + '.midi');
+    let stat = fs.statSync(filePath);
+    let file = fs.readFile(filePath, 'binary', () => {
+      res.setHeader('Content-Length', stat.size);
+      res.setHeader('Content-Type', 'audio/midi');
+      res.setHeader('Content-Disposition', 'attachment; filename=' + filePath);
+      res.sendFile(filePath);
+    });
+      // res.send({result: 'Hey there'})
+
+
+
+
+  });
 }
