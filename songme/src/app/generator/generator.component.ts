@@ -22,7 +22,6 @@ export class GeneratorComponent implements OnInit {
 
   constructor(generatorService: GeneratorService, private http: HttpClient, private re: Renderer2) {
     this.song = generatorService.makeSong();
-    this.MIDIjs = MIDIjs;
   }
 
   ngOnInit() {
@@ -30,6 +29,7 @@ export class GeneratorComponent implements OnInit {
   }
 
   generateClickHandle(e) {
+    this.MIDIjs = MIDIjs;
     this.songTitle = this.generateSongTitle.nativeElement.value;
     this.user = this.generateSongOwner.nativeElement.value;
     this.fileName = 'assets/' + this.user + this.songTitle + '.midi';
