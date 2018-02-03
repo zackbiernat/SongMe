@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "postinstall": "npm install --dev",
+    "preinstall”: “npm install @angular/cli @angular/compiler-cli typescript",
+    "postinstall": "npm run build",
     "start": "ng serve",
     "server": "nodemon index.js",
     "build": "ng build --prod && mkdir dist/assets",
