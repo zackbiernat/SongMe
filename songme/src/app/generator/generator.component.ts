@@ -28,7 +28,7 @@ export class GeneratorComponent implements OnInit {
 
   }
 
-  generateClickHandle(e) {
+  generateClickHandle() {
     this.MIDIjs = MIDIjs;
     this.songTitle = this.generateSongTitle.nativeElement.value;
     this.user = this.generateSongOwner.nativeElement.value;
@@ -39,7 +39,6 @@ export class GeneratorComponent implements OnInit {
       songTitle: this.songTitle,
       user: this.user
     };
-    console.log(this.fileName)
     this.http.post('http://localhost:3000/make/a/song/api', body).subscribe((data) => {
       console.log(data);
     }, (err) => {
