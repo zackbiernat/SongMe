@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "postinstall": "npm run build",
+    "postinstall": "npm install --dev",
     "start": "ng serve",
     "server": "nodemon index.js",
     "build": "ng build --prod && mkdir dist/assets",
