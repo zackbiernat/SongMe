@@ -4,10 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "postinstall": "npm run build && npm start",
+    "postinstall": "npm run build",
     "start": "ng serve",
     "server": "nodemon index.js",
-    "build": "ng build --prod && mkdir dist/assets",
+    "build": "ng build && mkdir dist/assets",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
