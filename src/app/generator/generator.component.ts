@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { HttpClient } from '@angular/common/http';
-
+import '../../environments/environment.prod.ts';
 declare let MIDIjs: any;
 
 @Component({
