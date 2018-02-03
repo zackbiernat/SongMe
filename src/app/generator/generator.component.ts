@@ -39,7 +39,11 @@ export class GeneratorComponent implements OnInit {
       songTitle: this.songTitle,
       user: this.user
     };
-    this.http.post('http://localhost:3000/make/a/song/api', body).subscribe((data) => {
+    let url = 'http://localhost:3000/make/a/song/api';
+    if (process.env.DEPLOYED) {
+      url = 'https://songme.herokuapp.com/make/a/song/api'
+    }
+    this.http.post(url, body).subscribe((data) => {
       console.log(data);
     }, (err) => {
       console.log(err);
