@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { HttpClient } from '@angular/common/http';
-import '../../environments/environment.prod.ts';
+import { environment } from '../../environments/environment.prod';
 declare let MIDIjs: any;
 
 @Component({
@@ -32,7 +32,7 @@ export class GeneratorComponent implements OnInit {
     this.MIDIjs = MIDIjs;
     this.songTitle = this.generateSongTitle.nativeElement.value;
     this.user = this.generateSongOwner.nativeElement.value;
-    this.fileName = 'assets/' + this.user + this.songTitle + '.midi';
+    this.fileName = 'https://songme.herokuapp.com/assets/' + this.user + this.songTitle + '.midi';
     let body = {
       song: this.song[0],
       chords: this.song[1],
@@ -40,7 +40,8 @@ export class GeneratorComponent implements OnInit {
       user: this.user
     };
     let url = 'http://localhost:3000/make/a/song/api';
-    if (process.env.DEPLOYED) {
+    if (environment.DEPLOYED === true) {
+      console.log('DEPLOYED is true')
       url = 'https://songme.herokuapp.com/make/a/song/api'
     }
     this.http.post(url, body).subscribe((data) => {

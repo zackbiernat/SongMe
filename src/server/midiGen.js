@@ -3,6 +3,7 @@ let fs = require('fs');
 const path = require('path')
 
 exports.makeMidi = function(req, res) {
+  console.log('calleds')
   let file = new Midi.File();
   let melody = new Midi.Track();
   let accomp = new Midi.Track();
@@ -72,6 +73,8 @@ exports.makeMidi = function(req, res) {
       // res.sendFile(filePath);
 
     // });
-    res.send({result: 'Hey there'})
+    console.log('qs', qs);
+    console.log('file', file.toBytes())
+    res.send({result: 'Hey there friend'})
   });
 }
