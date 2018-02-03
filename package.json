@@ -7,7 +7,7 @@
     "preinstall": "npm install @angular/cli @angular/compiler-cli typescript",
     "postinstall": "npm run build",
     "start": "ng serve",
-    "server": "nodemon index.js",
+    "server": "node index.js",
     "build": "ng build --prod && mkdir dist/assets",
     "test": "ng test",
     "lint": "ng lint",
