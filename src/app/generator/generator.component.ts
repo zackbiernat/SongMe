@@ -28,6 +28,13 @@ export class GeneratorComponent implements OnInit {
 
   }
 
+  playClickHandle() {
+    this.MIDIjs = MIDIjs;
+    this.fileName = 'https://songme.herokuapp.com/assets/' + this.user + this.songTitle + '.midi';
+    console.log(this.fileName)
+    MIDIjs.play(this.fileName)
+  }
+
   generateClickHandle() {
     this.MIDIjs = MIDIjs;
     this.songTitle = this.generateSongTitle.nativeElement.value;
@@ -41,7 +48,6 @@ export class GeneratorComponent implements OnInit {
     };
     let url = 'http://localhost:3000/make/a/song/api';
     if (environment.DEPLOYED === true) {
-      console.log('DEPLOYED is true')
       url = 'https://songme.herokuapp.com/make/a/song/api'
     }
     this.http.post(url, body).subscribe((data) => {
