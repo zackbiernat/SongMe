@@ -31,7 +31,6 @@ export class GeneratorComponent implements OnInit {
   playClickHandle() {
     this.MIDIjs = MIDIjs;
     this.fileName = 'https://songme.herokuapp.com/assets/' + this.user + this.songTitle + '.midi';
-    console.log(this.fileName)
     MIDIjs.play(this.fileName)
   }
 
