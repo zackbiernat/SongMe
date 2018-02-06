@@ -5,6 +5,7 @@ const cors = require('cors');
 let http = require('http').Server(app);
 const makeMidi = require('./src/server/midiGen').makeMidi;
 const signUpUser = require('./src/server/db/User').addNewUser;
+const authUser = require('./src/server/db/User').authenticateUser;
 require('dotenv').config();
 
 // require('dotenv').config();
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 
 app.post('/make/a/song/api', makeMidi);
 app.post('/user/signup', signUpUser);
+app.post('/user/auth', authUser);
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/dist/index.html');
 });

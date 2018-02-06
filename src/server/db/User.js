@@ -2,10 +2,10 @@ const MongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 const url = process.env.dbUrl;
 
+//Handles User signup req
 exports.addNewUser = (req, res) => {
   MongoClient.connect(url, (err, db) => {
     checkIfUserExists(db, req.body.username, (notFound) => {
-      console.log('NF', notFound)
       if (notFound) {
         dbAddUser(db, req.body, (success) => {
           if (success) {
@@ -19,7 +19,7 @@ exports.addNewUser = (req, res) => {
         res.sendStatus(409); // Username already exists
       }
     });
-  })
+  });
 }
 
 //Signs up user
@@ -28,9 +28,9 @@ const dbAddUser = (db, profile, cb) => {
   collection.insert(profile, (err, success) => {
     cb(success);
   });
-
 }
 
+//Check if username is unique
 const checkIfUserExists = (db, username, cb) => {
   let collection = db.collection('users');
   collection.find({username: username})
@@ -40,12 +40,30 @@ const checkIfUserExists = (db, username, cb) => {
     } else {
       cb(true);
     }
-  })
+  });
 }
 
-
+//Handles User auth request
 exports.authenticateUser = (req, res) => {
   MongoClient.connect(url, (err, db) => {
+    authenticateCredentials(db, req.body, (success) => {
+      if (success) {
+        res.send(success)
+      } else {
+        res.sendStatus(403); //Authentication failed
+      }
+    });
+  });
+}
 
+const authenticateCredentials = (db, credentials, cb) => {
+  let collection = db.collection('users');
+  collection.find(credentials)
+  .toArray((err, found) => {
+    if (found.length) {
+      cb(found[0]);
+    } else {
+      cb(false);
+    }
   })
 }
