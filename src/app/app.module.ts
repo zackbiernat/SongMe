@@ -4,12 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { GeneratorComponent } from './generator/generator.component';
+import { AuthComponent } from './auth/auth.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GeneratorComponent
+    GeneratorComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

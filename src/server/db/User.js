@@ -9,7 +9,7 @@ exports.addNewUser = (req, res) => {
       if (notFound) {
         dbAddUser(db, req.body, (success) => {
           if (success) {
-            res.send(success.ops[0]);
+            res.sendStatus(201);
           } else {
             res.sendStatus(404);
           }
@@ -48,7 +48,7 @@ exports.authenticateUser = (req, res) => {
   MongoClient.connect(url, (err, db) => {
     authenticateCredentials(db, req.body, (success) => {
       if (success) {
-        res.send(success)
+        res.sendStatus(200); //Auth OK
       } else {
         res.sendStatus(403); //Authentication failed
       }
@@ -56,14 +56,15 @@ exports.authenticateUser = (req, res) => {
   });
 }
 
+//Check if credentials are valid
 const authenticateCredentials = (db, credentials, cb) => {
   let collection = db.collection('users');
   collection.find(credentials)
   .toArray((err, found) => {
     if (found.length) {
-      cb(found[0]);
+      cb(true);
     } else {
       cb(false);
     }
-  })
+  });
 }
