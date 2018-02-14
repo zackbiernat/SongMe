@@ -19,9 +19,10 @@ export class GeneratorComponent implements OnInit {
   songTitle: string;
   fileName: string;
   MIDIjs: any;
+  generatorService: any;
 
   constructor(generatorService: GeneratorService, private http: HttpClient, private re: Renderer2) {
-    this.song = generatorService.makeSong();
+    this.generatorService = generatorService;
   }
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class GeneratorComponent implements OnInit {
 
   generateClickHandle() {
     this.MIDIjs = MIDIjs;
+    this.song = this.generatorService.makeSong();
     this.songTitle = this.generateSongTitle.nativeElement.value;
     this.user = this.generateSongOwner.nativeElement.value;
     this.fileName = 'https://songme.herokuapp.com/assets/' + this.user + this.songTitle + '.midi';
